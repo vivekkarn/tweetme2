@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 # Create your views here.
@@ -30,13 +30,19 @@ def logout_view(request):
         "btn_label": "Click to Confirm",
         "title": "Logout"
     }
-    return render(request, "accounts/logout.html", context)
+    return render(request, "accounts/auth.html", context)
 
 
 def register_view(request):
-    form = UserCreationForm(request, data=request.POST or None)
+    form = UserCreationForm(request.POST or None)
     if form.is_valid():
-        print(form.cleaned_data)
+        form.save()
+        # user.set_password(user.cleaned_data.get('password1'))
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('/')
     context = {
         "form": form,
         "btn-label": "Register",
