@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse, JsonResponse
 from django.conf import settings
@@ -10,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.pagination import PageNumberPagination
 
 # Create your views here.
 
@@ -28,15 +30,29 @@ def tweet_create_view(request, *args, **kwargs):
     return Response({}, status=400)
 
 
+def get_paginated_queryset_response(qs, request):
+    paginator = PageNumberPagination()
+    paginator.page_size = 20
+    paginated_qs = paginator.paginate_queryset(qs, request)
+    serializer = TweetSerializer(paginated_qs, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
+
+@api_view(['GET'])
+def tweet_feed_view(request, *args, **kwargs):
+    user = request.user
+    qs = Tweet.objects.feed(user)
+    return get_paginated_queryset_response(qs, request)
+
+
 @api_view(['GET'])
 def tweet_list_view(request, *args, **kwargs):
     qs = Tweet.objects.all()
     username = request.GET.get('username')
     print('username is ', username)
     if username != None:
-        qs = qs.filter(user__username=username)
-    serializer = TweetSerializer(qs, many=True)
-    return Response(serializer.data)
+        qs = qs.by_username(username)
+    return get_paginated_queryset_response(qs, request)
 
 
 @api_view(['GET'])

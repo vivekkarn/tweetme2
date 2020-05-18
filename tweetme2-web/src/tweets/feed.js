@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { apiTweetList } from "./lookup";
 import { Tweet } from "./detail";
+import { apiTweetFeed } from "./lookup";
 
-export function TweetsList(props) {
+export function FeedList(props) {
   const [tweetsInit, setTweetsInit] = useState([]);
   const [tweets, setTweets] = useState([]);
   const [nextURL, setNextURL] = useState(null);
@@ -22,11 +22,9 @@ export function TweetsList(props) {
           setNextURL(response.next);
           setTweetsInit(response.results);
           setTweetDidSet(true);
-        } else {
-          alert("an error occured.");
         }
       };
-      apiTweetList(props.username, handleTweetListLookup);
+      apiTweetFeed(handleTweetListLookup);
     }
   }, [tweetsInit, tweetDidSet, setTweetDidSet, props.username]);
 
@@ -53,7 +51,7 @@ export function TweetsList(props) {
           console.log("An error.");
         }
       };
-      apiTweetList(props.username, handleLoadNextResponse, nextURL);
+      apiTweetFeed(handleLoadNextResponse, nextURL);
     }
   };
   return (

@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+{% if request.user.is_authenticated %}
+<div id="tweetme-2-feed"></div>
+{% else %}
+<h1>Why not working again</h1>
+<div id="tweetme-2" data-username="vivek"></div>
+{% endif %}
+{% endblock content %}

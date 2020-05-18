@@ -7,7 +7,7 @@ from django.conf import settings
 
 
 def home_view(request, *args, **kwargs):
-    return render(request, "pages/home.html")
+    return render(request, "pages/feed.html")
 
 
 def tweets_list_view(request, *args, **kwargs):
