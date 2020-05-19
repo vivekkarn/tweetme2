@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 # Configure Django App for Heroku.
 import django_heroku
-django_heroku.settings(locals())
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -137,7 +138,7 @@ STATICFILES_DIRS = [
 
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -165,3 +166,5 @@ REST_FRAMEWORK = {
 
 RECAPTCHA_PUBLIC_KEY = '6LcuiPkUAAAAACFjo4wy0mPWrtS3Ug8uDdcjH3tx'
 RECAPTCHA_PRIVATE_KEY = '6LcuiPkUAAAAAByK9oQQTsi8uM2Knd4HeDYrOhp5'
+
+django_heroku.settings(locals())
