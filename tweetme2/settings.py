@@ -24,7 +24,7 @@ SECRET_KEY = 'senx-7oj()(dk1e)+=(efpejo=5&3fi^%*^s2*cblauzwv6@e7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'tweetme2.herokuapp.com']
 LOGIN_URL = "/login"
 
 
