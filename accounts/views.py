@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from captcha.fields import ReCaptchaField
 
 # Create your views here.
 
@@ -35,6 +36,7 @@ def logout_view(request):
 
 def register_view(request):
     form = UserCreationForm(request.POST or None)
+    captcha = ReCaptchaField()
     if form.is_valid():
         form.save()
         # user.set_password(user.cleaned_data.get('password1'))
@@ -46,6 +48,7 @@ def register_view(request):
     context = {
         "form": form,
         "btn-label": "Register",
-        "title": "Register"
+        "title": "Register",
+        "captcha": True
     }
     return render(request, "accounts/auth.html", context)

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Third Party
     'rest_framework',
     'corsheaders',
+    'captcha',
     # Custom
     'tweets',
     'accounts',
@@ -158,3 +159,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
     'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES
 }
+
+RECAPTCHA_PUBLIC_KEY = '6LcuiPkUAAAAACFjo4wy0mPWrtS3Ug8uDdcjH3tx'
+RECAPTCHA_PRIVATE_KEY = '6LcuiPkUAAAAAByK9oQQTsi8uM2Knd4HeDYrOhp5'

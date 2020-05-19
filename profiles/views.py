@@ -47,3 +47,9 @@ def profile_update_view(request, *args, **kwargs):
         "btn_label": "Save"
     }
     return render(request, "profiles/update.html", context)
+
+
+def profile_list_all(request, *args, **kwargs):
+    all_users = Profiles.objects.all
+    context = {"all_users": all_users}
+    return render(request, "profiles/listall.html", context)

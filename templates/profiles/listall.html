@@ -1,6 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 {% if request.user.is_authenticated %}
-<div id="tweetme-2-feed"></div>
+<div class="container">
+    {% for profile in all_users %}
+    <p>
+        <a href="/profiles/{{ profile.user}}">@{{ profile.user}}</a>
+    </p>
+
+    {% endfor %}
+</div>
 {% else %}
 <h1>Welcome!</h1>
 <h2>Please <a href="/login">login</a> or <a href="/login">register</a> to continue.</h2>

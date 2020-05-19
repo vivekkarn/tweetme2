@@ -17,7 +17,7 @@ export function Tweet(props) {
   let className = props.className ? props.className : "col-10 mx-auto col-md-6";
   className =
     isRetweet === true ? `${className} p-2 border rounded` : className;
-  const action = { type: "like", display: "Likes" };
+  const action = { type: "like", display: "Upvote" };
 
   const path = window.location.pathname;
   const idRegex = /(?<tweetid>\d+)/;
@@ -72,12 +72,12 @@ export function Tweet(props) {
                   <ActionBtn
                     tweet={actionTweet}
                     didperformAction={handlePerformAction}
-                    action={{ type: "unlike", display: "Unlike" }}
+                    action={{ type: "unlike", display: "Downvote" }}
                   />
                   <ActionBtn
                     tweet={actionTweet}
                     didperformAction={handlePerformAction}
-                    action={{ type: "retweet", display: "Retweets" }}
+                    action={{ type: "retweet", display: "Repost" }}
                   />
                 </React.Fragment>
               )}
